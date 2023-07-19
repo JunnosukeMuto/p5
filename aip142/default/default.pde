@@ -59,6 +59,7 @@ class MyLine extends MyShape {  // MyShapeを受け継いだMyLineを作成
     v.add(p1);                     // スクリーン座標に変換
     return v.dist(m);              // マウスとの最短距離を返す
   }
+
   void end(int x, int y) {
     p2.x=x; 
     p2.y=y;
@@ -95,54 +96,12 @@ class MyCircle extends MyShape {  // MyShapeを受け継いだMyCircleを作成
   }
 }
 
-class MyRect extends MyShape {  // 長方形（MyShapeを継承）
-  float w, h;  // 四角形の幅と高さ
-
-  // 新たに四角形を作成（コンストラクタ）
-  MyRect() {
-    super();   // MyShapeと同じ処理
-  }
-
-  // 図形を表示する
-  void display() {
-    super.display();    // MyShapeと同じ処理
-    rectMode(CORNER);   // 四角形を描画する
-    rect(p1.x, p1.y, w, h);
-  }
-
-  // 図形の枠を表示する
-  void showFrame() {
-    super.showFrame();
-    rectMode(CENTER);
-    rect(p1.x, p1.y, 5, 5);    // 四隅に小さい□を表示
-    rect(p1.x, p1.y+h, 5, 5);
-    rect(p1.x+w, p1.y, 5, 5);
-    rect(p1.x+w, p1.y+h, 5, 5);
-    noFill();
-    rectMode(CORNER);
-    rect(p1.x, p1.y, w, h);    // 枠を重ねて表示
-  }
-
-  // 長方形の中央とマウスとの間の距離を求める
-  float distance(PVector m) { 
-    PVector p = p1.copy().add(new PVector(w/2, h/2));
-    
-    return p.dist(m);
-  }
-
-  // 描画中の図形の座標指定
-  void end(int x, int y) {   //図形の終点を設定
-    // ★（３）   以下の2行を記述しなさい
-    w=x-p1.x;
-    h=y-p1.y;
-  }
-}
 
 import controlP5.*;
 ControlP5 cp5;
 ButtonBar menu;
 
-int mode=4; // 0:TOP, 1:BOTTOM, 2:MOVE, 3:DELETE, 4:LINE, 5:CIRCLE, 6:RECT
+int mode=4; // 0:TOP, 1:BOTTOM, 2:MOVE, 3:DELETE, 4:LINE, 5:CIRCLE
 
 ArrayList <MyShape> shapes;  // MyShape型とすると様々な図形を入れることが出来る
 
@@ -153,7 +112,7 @@ void setup() {
   menu=cp5.addButtonBar("menu")
     .setPosition(0, 0)
     .setSize(400, 40)
-    .addItems(split("TOP BOTTOM MOVE DELETE LINE CIRCLE RECT", " "));
+    .addItems(split("TOP BOTTOM MOVE DELETE LINE CIRCLE", " "));
   shapes=new ArrayList <MyShape>();
 }
 
@@ -204,10 +163,8 @@ void mousePressed() {
     break;
   case 4:  // LINE
   case 5:  // CIRCLE
-  case 6:  // RECT
     if (mode==4) s=new MyLine();
     else if (mode==5) s=new MyCircle();
-    else if (mode==6) s=new MyRect();
     shapes.add(s);
     s.start(mouseX, mouseY);
     s.end(mouseX, mouseY);
@@ -218,7 +175,7 @@ void mousePressed() {
 void mouseDragged() {
   if (!shapes.isEmpty()) {
     MyShape top=shapes.get(shapes.size()-1); // 最前面を取得
-    if (mode>=4) { // LINE, CIRCLE, RECT なら
+    if (mode>=4) { // LINE, CIRCLE なら
       top.end(mouseX, mouseY);
     } else if (mode==2) {// MOVEなら
       top.move(mouseX-pmouseX, mouseY-pmouseY);
