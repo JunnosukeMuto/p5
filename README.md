@@ -2,14 +2,18 @@
 
 ## 環境構築
 
-### Linuxユーザー
+### Arch系Linuxユーザー
 
-`use/share/processing/processing-java`が存在するなら、
+```
+cp .vscode/linux-tasks.json .vscode/tasks.json
+```
+pacmanでprocessingをインストールしたら、`use/share/processing/processing-java`ができると思います。\
 クローンしたディレクトリをvscodeで開いて中のpdeファイルを`ctrl+shift+b`で実行できます。
 
-### Windows,Macユーザー
+### Windowsユーザー
 
-`.vscode`を、ググってそれっぽく書き換えてください。
+`processing-java.exe`を環境変数に登録してください。
+`.vscode/windows-tasks.json`を、`tasks.json`にリネームしましょう。
 
 ## 新しくファイルを追加する場合
 
