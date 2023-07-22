@@ -7,7 +7,7 @@
 ```
 cp .vscode/linux-tasks.json .vscode/tasks.json
 ```
-pacmanでprocessingをインストールしたら、`use/share/processing/processing-java`ができると思います。\
+pacmanでprocessingをインストールしたら、`usr/share/processing/processing-java`ができると思います。\
 クローンしたディレクトリをvscodeで開いて中のpdeファイルを`ctrl+shift+b`で実行できます。
 
 ### Windowsユーザー
