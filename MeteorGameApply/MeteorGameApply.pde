@@ -28,7 +28,7 @@ class Meteor {
   Meteor() {
     size = 20;                              // 隕石の半径は20に固定
     pos = new PVector(random(size, width - size), -size);
-    vel = new PVector(0, random(0.1, 2));   // 初速度をランダムに決定
+    vel = new PVector(0, random(1, 3));   // 初速度をランダムに決定
     if (random(1) < 0.5) {
       name = (char)random('A', 'Z' + 1);    // 大文字隕石
       col = #ffff00;
@@ -128,7 +128,7 @@ void draw() {
       status = 1;                 // ゲーム中の状態へ
     }
   }
-  if (random(1) < 0.01) {         // 100フレームに１回だけ
+  if (random(1) < 0.03) {         // 100フレームに１回だけ
     meteors.add(new Meteor());    // 隕石をリストに追加
   }
   if (meteors.size() < 3) {       // 隕石リストが3未満なら隕石を追加
