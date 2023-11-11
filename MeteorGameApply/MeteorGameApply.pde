@@ -128,7 +128,7 @@ void draw() {
       status = 1;                 // ゲーム中の状態へ
     }
   }
-  if (random(1) < 0.03) {         // 100フレームに１回だけ
+  if (random(1) < 0.02) {         // 100フレームに１回だけ
     meteors.add(new Meteor());    // 隕石をリストに追加
   }
   if (meteors.size() < 3) {       // 隕石リストが3未満なら隕石を追加

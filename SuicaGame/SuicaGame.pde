@@ -21,7 +21,7 @@ void draw() {
 }
 
 void mousePressed() {
-    fruits.add(new Cherry(int(random(40,width-40)),45));
+    fruits.add(new Cherry(int(random(40,width - 40)),45));
 }
 
 class Fruit {
@@ -35,28 +35,28 @@ class Fruit {
         pos.y = y;
     }
     void display() {
-        circle(pos.x, pos.y, radius*2);
+        circle(pos.x, pos.y, radius * 2);
     }
     void collision(Fruit fruit) {
         PVector n = pos.copy().sub(fruit.pos).normalize();
         pos = fruit.pos.copy().add(n.copy().mult(fruit.radius + radius));
         float v1cos = vel.copy().dot(n);
-        float v2cos = fruit.vel.copy().dot(n)*-1.0;
-        float totalMomentum = mass*v1cos+fruit.mass*v2cos;
-        float relativeSpeedAfter = e*(v1cos+v2cos);
-        float totalMass = mass+fruit.mass;
-        vel.sub(n.copy().mult(PVector.dot(vel, n))).sub(n.copy().mult((-totalMomentum+fruit.mass*relativeSpeedAfter)/totalMass));
-        fruit.vel.add(n.copy().mult(PVector.dot(vel, n))).add(n.copy().mult((-totalMomentum+mass*relativeSpeedAfter)/totalMass));
+        float v2cos = fruit.vel.copy().dot(n) *-  1.0;
+        float totalMomentum = mass * v1cos + fruit.mass * v2cos;
+        float relativeSpeedAfter = e * (v1cos + v2cos);
+        float totalMass = mass + fruit.mass;
+        vel.sub(n.copy().mult(PVector.dot(vel, n))).sub(n.copy().mult(( -totalMomentum + fruit.mass * relativeSpeedAfter) / totalMass));
+        fruit.vel.add(n.copy().mult(PVector.dot(vel, n))).add(n.copy().mult(( -totalMomentum + mass * relativeSpeedAfter) / totalMass));
     }
     void step() {
         vel.y += g;
         pos.add(vel);
-
+        
         for (Fruit fruit : fruits) {
             if (fruit == this) {continue;}
             if (pos.dist(fruit.pos) < radius + fruit.radius) {collision(fruit);}
         }
-
+        
         if (pos.y > height - radius) { // bottom
             pos.y = height - radius;
             vel.y = -e * vel.y;
@@ -82,14 +82,8 @@ class Cherry extends Fruit {
         super.mass = 1.0;
     }
     void collision(Fruit fruit) {
-        if (fruit instanceof Cherry) {
-            removeList.add(this);
-            removeList.add(fruit);
-            PVector newPos = fruit.pos.copy().add(pos).mult(0.5);
-            addList.add(new Strawberry(newPos.x, newPos.y));
-        } else {
-            super.collision(fruit);
-        }
+        super.collision(fruit);
+        
     }
 }
 
