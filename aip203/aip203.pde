@@ -2,7 +2,7 @@ void setup() {
     double H = 0.02;
     double Xmin = 0.0;
     double Xmax = 2.0;
-    double N = (Xmax - Xmin) / H;
+    long N = Math.round((Xmax - Xmin) / H);
     double x0, x1, y0, y1;
     PrintWriter output = createWriter("runge_kutta_output.csv");
     
