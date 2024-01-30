@@ -21,7 +21,7 @@ void draw() {
 }
 
 void mousePressed() {
-    fruits.add(new Cherry(int(random(40,width - 40)),45));
+    fruits.add(new Cherry(mouseX,45));
 }
 
 class Fruit {
