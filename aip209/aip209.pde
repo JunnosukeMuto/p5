@@ -20,7 +20,7 @@ void setup() {
     // 左辺行列項の計算
     for (j = 0; j <= M; ++j) {
         for (k = 0; k <= M; ++k) {
-            // シグマ計算の役割 xi^(j+k)を足す
+            // iのfor文はシグマ計算の役割 xi^(j+k)の総和
             for (i = 1; i <= N; ++i) {
                 a[j][k] = a[j][k] + pow(x[i-1], j+k);
             }
@@ -28,9 +28,9 @@ void setup() {
     }
 
     // 右辺行列項の計算
-    for (j = 0; j < M; ++j) {
-        for (i = 1; i<= N; ++i) {
-            // シグマ計算の役割 yi*xi^(j)を足す
+    for (j = 0; j <= M; ++j) {
+        // iのfor文はシグマ計算の役割 yi*xi^(j)の総和
+        for (i = 1; i <= N; ++i) {
             a[j][M+1] = a[j][M+1] + y[i-1]*pow(x[i-1], j);
         }
     }

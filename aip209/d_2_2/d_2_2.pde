@@ -28,8 +28,8 @@ void setup() {
     }
 
     // 右辺行列項の計算
-    for (j = 0; j < M; ++j) {
-        for (i = 1; i<= N; ++i) {
+    for (j = 0; j <= M; ++j) {
+        for (i = 1; i <= N; ++i) {
             // シグマ計算の役割 yi*xi^(j+k)を足す
             a[j][M+1] = a[j][M+1] + y[i-1]*pow(x[i-1], j);
         }
